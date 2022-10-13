@@ -17,7 +17,7 @@ const port = process.env.PORT || 3000
 app.use(express.static(__dirname + '/static'))
 let bmi;
 
-app.get('https://health-insurance-risk-server.azurewebsites.net/send', (req, res) => { 	// localhost:3000/send for local testing, https://health-insurance-risk-server.azurewebsites.net/send for azure server -am
+app.get('/send', (req, res) => { 	// localhost:3000/send for local testing, https://health-insurance-risk-server.azurewebsites.net/send for azure server -am
 	var inputs = url.parse(req.url, true).query
 	const age = parseInt(inputs.patAge)
 	const height = parseInt(inputs.patHeight)
