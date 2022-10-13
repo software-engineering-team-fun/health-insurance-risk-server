@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'health-insurance-risk-server'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9C83D5C3489E483ABC06922ADFD990F6 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AE583416769A4F15914D7E3846176340 }}
           package: .
