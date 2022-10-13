@@ -20,7 +20,12 @@ let bmi;
 app.get('/send', (req, res) => { 	// localhost:3000/send for local testing, https://health-insurance-risk-server.azurewebsites.net/send for azure server -am
 	var inputs = url.parse(req.url, true).query
 	const age = parseInt(inputs.patAge)
-   res.send('Patient Age ' + age)
+	const height = parseInt(inputs.patHeight)
+	const weight = parseInt(inputs.patWeight)
+	const sys = parseInt(inputs.patSys)
+	const dia = parseInt(inputs.patDia)
+	const alzH = parse(inputs.patDiaH)
+   res.send('Patient Age ' + age + " Height: " + height + ' Weight ' + weight + " sys: " + sys + ' Dia ' + dia);
 
 });
 //from node.js azure template -am
