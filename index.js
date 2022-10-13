@@ -24,7 +24,6 @@ app.get('/send', (req, res) => { 	// localhost:3000/send for local testing, http
 	const weight = parseInt(inputs.patWeight)
 	const sys = parseInt(inputs.patSys)
 	const dia = parseInt(inputs.patDia)
-	const alzH = parse(inputs.patDiaH)
    res.send('Patient Age ' + age + " Height: " + height + ' Weight ' + weight + " sys: " + sys + ' Dia ' + dia);
 
 });
