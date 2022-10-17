@@ -1,9 +1,10 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
 app = express()
 
 var url = require('url');
 app.use(express.json());
-const cors = require('cors')
 app.use(
 	cors({
 		origin: "*",
@@ -11,38 +12,34 @@ app.use(
 	})
 )
 
+// Configuring body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 const port = process.env.PORT || 3000
 
 // Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
 app.use(express.static(__dirname + '/static'))
-let bmi;
+var data;
 
-app.get('/send', (req, res) => { 	// localhost:3000/send for local testing, https://health-insurance-risk-server.azurewebsites.net/send for azure server -am
-	var inputs = url.parse(req.url, true).query
-	const age = parseInt(inputs.patAge)
-	const height = parseInt(inputs.patHeight)
-	const weight = parseInt(inputs.patWeight)
-	const sys = parseInt(inputs.patSys)
-	const dia = parseInt(inputs.patDia)
-   res.send('Patient Age ' + age + " Height: " + height + ' Weight ' + weight + " sys: " + sys + ' Dia ' + dia);
+//Todo: Need to implement the math and the logic behind the BMI calculator.
+//Todo: We need to find a way to get the checkbox values from client also. Maybe implement a true false dealio thing. 
+//! leave post and get as they are. all we need to do is rather than return data. return whatever verdict we get for the BMI
 
-});
-//from node.js azure template -am
-app.get('/calculate-bmi', (request, response) => {
-	console.log('Calling "/calculate-bmi" on the Node.js server.')
-	var inputs = url.parse(request.url, true).query
-	const heightFeet = parseInt(inputs.feet)
-	const heightInches = parseInt(inputs.inches)
-	const weight = parseInt(inputs.lbs)
 
-	console.log('Height:' + heightFeet + '\'' + heightInches + '\"')
-	console.log('Weight:' + weight + ' lbs.')
+// this takes the data from the client 
+app.post('/calculate', (req, res) => {
+	console.log("receiving data...")
+	data = req.body;
+	//data = JSON.parse(JSON.stringify(data))
+	res.json(data) //displays json data in the server
+})
 
-	// Todo: Implement unit conversions and BMI calculations.
-	// Todo: Return BMI instead of Todo message.
-
-	response.type('text/plain')
-	response.send('Todo: Implement "/calculate-bmi"')
+//this sends the data back to client
+//here we should send the BMI and all that. using this now to test
+app.get('/calculate', (req, res)=>{
+	console.log('sending data...data')
+	res.send(data)
 })
 
 // Custom 404 page.
